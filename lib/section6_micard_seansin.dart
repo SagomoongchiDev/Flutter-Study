@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,6 +38,13 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              SizedBox(
+                height: 20.0,
+                width: 220.0,
+                child: Divider(
+                  color: Colors.teal.shade100,
+                ),
+              ),
               Card(
                 margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
                 child: ListTile(
@@ -45,13 +53,14 @@ class MyApp extends StatelessWidget {
                     color: Colors.teal,
                   ),
                   title: Text(
-                    '+82 01 5588 3944',
+                    '+82 01 3333 3333',
                     style: TextStyle(
                       color: Colors.teal.shade900,
                       fontFamily: 'Source Sans Pro',
                       fontSize: 20.0,
                     ),
                   ),
+                  onTap: () => launch('tel://01033333333'),
                 ),
               ),
               Card(
@@ -69,6 +78,7 @@ class MyApp extends StatelessWidget {
                       fontSize: 20.0,
                     ),
                   ),
+                  onTap: () => launch('mailto://nalpum1993@gmail.com'),
                 ),
               )
             ],
