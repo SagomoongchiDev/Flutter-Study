@@ -9,7 +9,8 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: Center(
           child: Image(
-            image: AssetImage('images/diamond.png'),
+            image: NetworkImage(
+                'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F1.bp.blogspot.com%2F-e37_Cw5sGvM%2FTuEADCdJ3kI%2FAAAAAAAAAv8%2FZ4RzI9cfXm4%2Fs1600%2Fdiamondclear.png&f=1&nofb=1'),
           ),
         ),
         backgroundColor: Colors.indigo[300],
