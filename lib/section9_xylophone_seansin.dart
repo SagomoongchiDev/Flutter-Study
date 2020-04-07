@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 import 'package:audioplayers/audio_cache.dart';
 
 void main() => runApp(XylophoneApp());
 
 class XylophoneApp extends StatelessWidget {
-  var children = <Widget>[];
+  buildKeyElement(List<Color> widgetColors, int iteratorNum) {
+    var xylophoneWidget = <Widget>[];
+    try {
+      return createKeyWidget(xylophoneWidget, widgetColors, iteratorNum);
+    } catch (e) {
+      return e;
+    }
+  }
 
-  static const colors = <Color>[
-    Colors.red,
-    Colors.orange,
-    Colors.yellow,
-    Colors.green,
-    Colors.blue,
-    Colors.indigo,
-    Colors.purple
-  ];
-
-  List<Widget> buildKeyElement() {
-    for (var i = 0; i < 7; i++) {
-      children.add(
+  List<Widget> createKeyWidget(
+      targetWidgets, List<Color> widgetColors, int iteratorNum) {
+    if (iteratorNum < 0 || iteratorNum > 7) {
+      throw new FormatException();
+    }
+    for (var i = 0; i < iteratorNum; i++) {
+      targetWidgets.add(
         Expanded(
           child: FlatButton(
-            color: colors[i],
+            color: widgetColors[i],
             onPressed: () => playSound(i + 1),
           ),
         ),
       );
     }
-    return children;
+    return targetWidgets;
   }
 
   void playSound(int scale) {
@@ -46,7 +46,15 @@ class XylophoneApp extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: buildKeyElement(),
+              children: buildKeyElement([
+                Colors.red,
+                Colors.orange,
+                Colors.yellow,
+                Colors.green,
+                Colors.blue,
+                Colors.indigo,
+                Colors.purple
+              ], 7),
             ),
           ),
         ),
