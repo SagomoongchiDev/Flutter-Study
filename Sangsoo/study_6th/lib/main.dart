@@ -28,20 +28,16 @@ class QuizPage extends StatefulWidget {
 
 List<Icon> scoreKeeper = [];
 
-
-int maxSizeofQuestion = quizBrain.questionBank.length;
 int questionNumber = 0;
 
 void whenClick(bool x) {
-  if (quizBrain.questionBank[questionNumber].questionAnswer == x)
+  if (quizBrain.getQuestionAnswer() == x) {
     scoreKeeper.add(Icon(Icons.check, color: Colors.blue));
-  else
+    quizBrain.nextQuestion();
+  } else {
     scoreKeeper.add(Icon(Icons.close, color: Colors.orange));
-
-  if (questionNumber < maxSizeofQuestion - 1)
-    questionNumber++;
-  else
-    questionNumber = 0;
+    quizBrain.nextQuestion();
+  }
 }
 
 class _QuizPageState extends State<QuizPage> {
@@ -57,7 +53,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.questionBank[questionNumber].questionText,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
