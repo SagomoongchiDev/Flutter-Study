@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mi_card/question.dart';
 
 void main() => runApp(Quizzler());
 
@@ -26,16 +27,16 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
+  int questionNumber = 0;
 
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.'
+  List<Question> questionBank = [
+    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
+    Question(
+        q: 'Approximately one quarter of human bones are in the feet.',
+        a: true),
+    Question(q: 'A slug\'s blood is green.', a: true),
   ];
 
-  List<bool> answers = [false, true, true];
-
-  int questionNumber = 0;
   bool isCorrect = false;
 
   void onClickAnswerBtn(bool btnType) {
@@ -51,7 +52,7 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   void checkAnswer(bool userResp, int questionNum) {
-    if (answers[questionNum] == userResp) {
+    if (questionBank[questionNum].questionAnswer == userResp) {
       scoreKeeper.add(Icon(
         Icons.check,
         color: Colors.green,
@@ -76,7 +77,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNumber],
+                questionBank[questionNumber].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 23.0,
