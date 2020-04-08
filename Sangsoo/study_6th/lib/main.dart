@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
+import 'quiz_brain.dart';
 
 void main() => runApp(Quizzler());
+QuizBrain quizBrain = QuizBrain();
 
 class Quizzler extends StatelessWidget {
   @override
@@ -27,29 +28,23 @@ class QuizPage extends StatefulWidget {
 
 List<Icon> scoreKeeper = [];
 
-List<Question> questionBank = [
-  Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-  Question(
-      q: 'Approximately one quarter of human bones are in the feet.', a: true),
-  Question(q: 'A slug\'s blood is green.', a: true)
-];
+
+int maxSizeofQuestion = quizBrain.questionBank.length;
+int questionNumber = 0;
+
+void whenClick(bool x) {
+  if (quizBrain.questionBank[questionNumber].questionAnswer == x)
+    scoreKeeper.add(Icon(Icons.check, color: Colors.blue));
+  else
+    scoreKeeper.add(Icon(Icons.close, color: Colors.orange));
+
+  if (questionNumber < maxSizeofQuestion - 1)
+    questionNumber++;
+  else
+    questionNumber = 0;
+}
 
 class _QuizPageState extends State<QuizPage> {
-  int maxSizeofQuestion = questionBank.length;
-  int questionNumber = 0;
-
-  void whenClick(bool x) {
-    if (questionBank[questionNumber].questionAnswer == x)
-      scoreKeeper.add(Icon(Icons.check, color: Colors.blue));
-    else
-      scoreKeeper.add(Icon(Icons.close, color: Colors.orange));
-
-    if (questionNumber < maxSizeofQuestion - 1)
-      questionNumber++;
-    else
-      questionNumber = 0;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,7 +57,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questionBank[questionNumber].questionText,
+                quizBrain.questionBank[questionNumber].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
