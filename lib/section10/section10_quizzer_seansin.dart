@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mi_card/quiz_brain.dart';
+import 'package:mi_card/section10/quiz_brain.dart';
 
 QuizBrain quizBrain = QuizBrain();
 

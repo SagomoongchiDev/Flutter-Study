@@ -1,4 +1,4 @@
-import 'package:mi_card/question.dart';
+import 'package:mi_card/section10/question.dart';
 
 class QuizBrain {
   int _questionNumber = 0;
