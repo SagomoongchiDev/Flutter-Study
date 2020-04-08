@@ -30,10 +30,25 @@ List<String> question = [
   'Approximately one quarter of human bones are in the feet.',
   'A slug\'s blood is green.'
 ];
+List<bool> answer = [false, true, true];
+
+
 
 class _QuizPageState extends State<QuizPage> {
   int maxSizeofQuestion = question.length;
   int questionNumber = 0;
+
+  void whenClick(bool x){
+    if (answer[questionNumber] == x)
+      scoreKeeper.add(Icon(Icons.check, color: Colors.blue));
+    else
+      scoreKeeper.add(Icon(Icons.close, color: Colors.orange));
+
+    if (questionNumber < maxSizeofQuestion - 1)
+      questionNumber++;
+    else
+      questionNumber = 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +87,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  scoreKeeper.add(Icon(Icons.check, color: Colors.blue));
-                  if (questionNumber < maxSizeofQuestion - 1)
-                    questionNumber++;
-                  else
-                    questionNumber = 0;
+                  whenClick(true);
                 });
               },
             ),
@@ -95,7 +106,9 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                //The user picked false.
+                setState(() {
+                  whenClick(false);
+                });
               },
             ),
           ),
