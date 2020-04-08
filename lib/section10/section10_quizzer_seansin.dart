@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mi_card/section10/quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizBrain quizBrain = QuizBrain();
 
@@ -33,16 +34,24 @@ class _QuizPageState extends State<QuizPage> {
 
   void onClickAnswerBtn(bool btnType) {
     setState(() {
-      if (quizBrain.checkAnswer(btnType)) {
-        scoreKeeper.add(Icon(
-          Icons.check,
-          color: Colors.green,
-        ));
-      } else {
-        scoreKeeper.add(Icon(
-          Icons.close,
-          color: Colors.red,
-        ));
+      try {
+        if (quizBrain.checkAnswer(btnType)) {
+          scoreKeeper.add(Icon(
+            Icons.check,
+            color: Colors.green,
+          ));
+        } else {
+          scoreKeeper.add(Icon(
+            Icons.close,
+            color: Colors.red,
+          ));
+        }
+      } catch (e) {
+        Alert(
+                context: context,
+                title: 'This is Last Question',
+                desc: 'Thank you for hard work.')
+            .show();
       }
     });
   }
