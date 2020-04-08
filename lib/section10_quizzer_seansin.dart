@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mi_card/question.dart';
+import 'package:mi_card/quiz_brain.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() => runApp(Quizzler());
 
@@ -27,42 +29,22 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  int questionNumber = 0;
-
-  List<Question> questionBank = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(
-        q: 'Approximately one quarter of human bones are in the feet.',
-        a: true),
-    Question(q: 'A slug\'s blood is green.', a: true),
-  ];
-
   bool isCorrect = false;
 
   void onClickAnswerBtn(bool btnType) {
-    if (questionNumber > 3) {
-      throw new FormatException();
-    } else {
-      setState(() {
-        print(questionNumber);
-        checkAnswer(btnType, questionNumber);
-        this.questionNumber = questionNumber + 1;
-      });
-    }
-  }
-
-  void checkAnswer(bool userResp, int questionNum) {
-    if (questionBank[questionNum].questionAnswer == userResp) {
-      scoreKeeper.add(Icon(
-        Icons.check,
-        color: Colors.green,
-      ));
-    } else {
-      scoreKeeper.add(Icon(
-        Icons.close,
-        color: Colors.red,
-      ));
-    }
+    setState(() {
+      if (quizBrain.checkAnswer(btnType)) {
+        scoreKeeper.add(Icon(
+          Icons.check,
+          color: Colors.green,
+        ));
+      } else {
+        scoreKeeper.add(Icon(
+          Icons.close,
+          color: Colors.red,
+        ));
+      }
+    });
   }
 
   @override
@@ -77,7 +59,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questionBank[questionNumber].questionText,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 23.0,
