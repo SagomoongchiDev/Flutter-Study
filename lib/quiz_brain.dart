@@ -1,9 +1,8 @@
-import 'dart:html';
-
 import 'package:mi_card/question.dart';
 
 class QuizBrain {
   int _questionNumber = 0;
+  bool _isLastQuestion = false;
 
   List<Question> _questionBank = [
     Question('Some cats are actually allergic to humans', true),
@@ -33,17 +32,16 @@ class QuizBrain {
         true),
   ];
 
-  bool nextQuestion() {
+  void nextQuestion() {
     if (_questionNumber < _questionBank.length - 1) {
       _questionNumber++;
-      return false;
     } else {
-      return true;
+      this.isLastQuestion(true);
     }
   }
 
-  bool isLastQuestion() {
-    return nextQuestion();
+  void isLastQuestion(bool value) {
+    _isLastQuestion = value;
   }
 
   String getQuestionText() {
@@ -63,16 +61,15 @@ class QuizBrain {
   }
 
   bool checkAnswer(bool userResp) {
-    if (!this.isLastQuestion()) {
-      if (this.getQuestionAnswer() == userResp) {
-        nextQuestion();
-        return true;
-      } else {
-        nextQuestion();
-        return false;
-      }
-    } else {
+    if (this._isLastQuestion) {
       throw new FormatException('This is Last Question');
+    }
+    if (this.getQuestionAnswer() == userResp) {
+      nextQuestion();
+      return true;
+    } else {
+      nextQuestion();
+      return false;
     }
   }
 }
