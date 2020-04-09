@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
-
+import 'package:rflutter_alert/rflutter_alert.dart';
 void main() => runApp(Quizzler());
 QuizBrain quizBrain = QuizBrain();
 
@@ -29,14 +29,26 @@ class QuizPage extends StatefulWidget {
 List<Icon> scoreKeeper = [];
 
 int questionNumber = 0;
+void finishedAct(context){
+  if(quizBrain.isFinished()==true){
+    Alert(
+      context: context,
+      title:"Your done",
+      desc:"blank"
+    ).show();
+    scoreKeeper.clear();
+  }
+}
 
-void whenClick(bool x) {
+void whenClick(bool x,context) {
   if (quizBrain.getQuestionAnswer() == x) {
     scoreKeeper.add(Icon(Icons.check, color: Colors.blue));
     quizBrain.nextQuestion();
+    finishedAct(context);
   } else {
     scoreKeeper.add(Icon(Icons.close, color: Colors.orange));
     quizBrain.nextQuestion();
+    finishedAct(context);
   }
 }
 
@@ -78,7 +90,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  whenClick(true);
+                  whenClick(true,context);
                 });
               },
             ),
@@ -98,7 +110,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  whenClick(false);
+                  whenClick(false,context);
                 });
               },
             ),

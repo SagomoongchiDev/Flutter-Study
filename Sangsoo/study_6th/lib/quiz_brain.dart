@@ -1,5 +1,3 @@
-import 'package:quizzler/main.dart';
-
 import 'question.dart';
 
 class QuizBrain {
@@ -34,10 +32,17 @@ class QuizBrain {
   ];
 
   void nextQuestion() {
-    if (_questionNumber < _questionBank.length-1) {
+    if (_questionNumber < _questionBank.length - 1) {
       _questionNumber++;
+    }
+  }
+
+  bool isFinished() {
+    if (_questionNumber == _questionBank.length - 1) {
+      _questionNumber=0;
+      return true;
     } else {
-      _questionNumber = 0;
+      return false;
     }
   }
 
