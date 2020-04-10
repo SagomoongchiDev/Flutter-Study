@@ -5,8 +5,10 @@ import 'reusable_card.dart';
 
 const bottomContainerHeight = 80.0;
 const bottomContainerColour = Color(0xFFEB1555);
-const inactiveCardColour =  Color(0xFF111328);
+const inactiveCardColour = Color(0xFF111328);
 const activeCardColour = Color(0xFF1D1E33);
+
+enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
   @override
@@ -14,6 +16,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender selectedGender = Gender.male;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,20 +31,27 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
-                    onTap: (){
-
+                  child: ReusableCard(
+                    onPress: (){
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
                     },
-                    child: ReusableCard(
-                      colour: inactiveCardColour,
-                      cardChild: MaleOrFemale(icon: FontAwesomeIcons.mars,text: 'Male'),
-                    ),
+                    colour: selectedGender==Gender.male?activeCardColour:inactiveCardColour,
+                    cardChild: MaleOrFemale(
+                        icon: FontAwesomeIcons.mars, text: 'Male'),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    colour: inactiveCardColour,
-                    cardChild: MaleOrFemale(icon: FontAwesomeIcons.venus, text: 'Female'),
+                    onPress: (){
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
+                    },
+                    colour: selectedGender==Gender.female?activeCardColour:inactiveCardColour,
+                    cardChild: MaleOrFemale(
+                        icon: FontAwesomeIcons.venus, text: 'Female'),
                   ),
                 )
               ],
@@ -78,6 +89,3 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
-
-
-
