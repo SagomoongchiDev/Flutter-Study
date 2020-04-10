@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'constants.dart';
 
 class MaleOrFemale extends StatelessWidget {
   MaleOrFemale({@required this.icon ,@required this.text});
@@ -17,10 +18,7 @@ class MaleOrFemale extends StatelessWidget {
           height: 15.0,
         ),
         Text(text,
-          style: TextStyle(
-              fontSize: 18.0,
-              color: Color(0xFF8D8E98)
-          ),
+          style: labelTextStyle,
         )
       ],
     );
