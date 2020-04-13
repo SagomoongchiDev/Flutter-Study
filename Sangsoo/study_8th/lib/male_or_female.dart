@@ -18,8 +18,8 @@ class MaleOrFemale extends StatelessWidget {
           height: 15.0,
         ),
         Text(text,
-          style: labelTextStyle,
-        )
+          style: kLabelTextStyle,
+        ),
       ],
     );
   }
