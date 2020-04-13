@@ -20,11 +20,11 @@ class _InputPageState extends State<InputPage> {
   void updateColor(int gender) {
     if (notFemale(gender)) {
       setState(() {
-        maleCardColor = cardTrigger(maleCardColor);
+        cardTrigger(notFemale(gender));
       });
     } else {
       setState(() {
-        femaleCardColor = cardTrigger(femaleCardColor);
+        cardTrigger(notFemale(gender));
       });
     }
   }
@@ -37,11 +37,13 @@ class _InputPageState extends State<InputPage> {
     }
   }
 
-  Color cardTrigger(Color cardWidgetColor) {
-    if (cardWidgetColor == inactiveCardColor) {
-      return activeCardColor;
+  void cardTrigger(bool notFemale) {
+    if (notFemale) {
+      this.maleCardColor = activeCardColor;
+      this.femaleCardColor = inactiveCardColor;
     } else {
-      return inactiveCardColor;
+      this.maleCardColor = inactiveCardColor;
+      this.femaleCardColor = activeCardColor;
     }
   }
 
