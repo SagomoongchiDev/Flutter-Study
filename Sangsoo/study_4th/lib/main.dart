@@ -7,16 +7,12 @@ void main() {
       home: Scaffold(
         backgroundColor: Colors.lightBlueAccent,
         appBar: AppBar(
-            backgroundColor: Colors.blue,
-            title: Text('Ask Me Anything')
-        ),
+            backgroundColor: Colors.blue, title: Text('Ask Me Anything')),
         body: Ball(),
       ),
     ),
   );
 }
-
-
 
 class Ball extends StatefulWidget {
   @override
@@ -25,22 +21,19 @@ class Ball extends StatefulWidget {
 
 class _BallState extends State<Ball> {
   int picNum = 1;
-  void click(){
+  void click() {
+    print('I got Clicked');
     setState(() {
-      picNum = Random().nextInt(5)+1;
+      picNum = Random().nextInt(5) + 1;
     });
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Center(
         child: FlatButton(
-          child: Image.asset('images/ball$picNum.png'),
-          onPressed: click
-        ),
+            child: Image.asset('images/ball$picNum.png'), onPressed: click),
       ),
     );
   }
