@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mi_card/section12/pages/constants/bmi_calculator_constants.dart';
 
 class CustomIconCardChild extends StatelessWidget {
   CustomIconCardChild({@required this.iconName, @required this.iconText});
@@ -28,13 +29,7 @@ class CustomIconCardChild extends StatelessWidget {
         SizedBox(
           height: 15.0,
         ),
-        Text(
-          iconText,
-          style: TextStyle(
-            fontSize: 18.0,
-            color: Color(0xFF8D8E98),
-          ),
-        )
+        Text(iconText, style: labelTextStyle)
       ],
     );
   }
