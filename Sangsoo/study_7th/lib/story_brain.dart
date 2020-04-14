@@ -75,9 +75,6 @@ class StoryBrain{
       else{
         reset();
       }
-
-      print(getStory());
-
     }
   }
   bool buttonShouldBeVisible(){
