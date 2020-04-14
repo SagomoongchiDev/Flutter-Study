@@ -11,13 +11,11 @@ class BottomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/BMI');
-      },
+      onTap: onTap,
       child: Container(
         child: Center(
           child: Text(
-            'CALCULATE',
+            buttonTitle,
             style: kLargeButtonTextStyle,
           ),
         ),
