@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //Custom Widget
-import 'round_icon.dart';
-import 'male_or_female.dart';
-import 'reusable_card.dart';
+import '../components/round_icon.dart';
+import '../components/male_or_female.dart';
+import '../components/reusable_card.dart';
+import '../components/bottom_button.dart';
 
 //etc
-import 'constants.dart';
-
+import '../constants.dart';
 
 enum Gender { male, female }
 
@@ -177,7 +177,7 @@ class _InputPageState extends State<InputPage> {
                           children: <Widget>[
                             RoundIconButton(
                               icon: FontAwesomeIcons.minus,
-                              action: (){
+                              action: () {
                                 setState(() {
                                   age--;
                                 });
@@ -186,8 +186,9 @@ class _InputPageState extends State<InputPage> {
                             SizedBox(
                               width: 10.0,
                             ),
-                            RoundIconButton( icon: FontAwesomeIcons.plus,
-                              action: (){
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              action: () {
                                 setState(() {
                                   age++;
                                 });
@@ -202,16 +203,10 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColour,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kBottomContainerHeight,
-          )
+          BottomButton()
         ],
       ),
     );
   }
 }
-
 

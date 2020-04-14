@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class MaleOrFemale extends StatelessWidget {
   MaleOrFemale({@required this.icon ,@required this.text});
