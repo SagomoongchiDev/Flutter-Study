@@ -1,17 +1,17 @@
-name: clima
+name: flash_chat
 description: A new Flutter application.
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.1.0<3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
   cupertino_icons: ^0.1.2
-  geolocator: ^3.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -21,9 +21,3 @@ flutter:
 
   assets:
   - images/
-
-  fonts:
-  - family: Spartan MB
-    fonts:
-    - asset: fonts/SpartanMB-Black.otf
-      weight: 900
