@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mi_card/section12/pages/components/round_icon_button.dart';
+import 'package:mi_card/section12/pages/result_page.dart';
 
 import 'components/CustomIconCardChild.dart';
 import 'components/ReusableCard.dart';
@@ -179,10 +180,15 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: bottomContainerColor,
-            margin: EdgeInsets.only(top: 10.0),
-            height: bottomContainerHeight,
+          GestureDetector(
+            onTap: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => ResultPage())),
+            child: Container(
+              child: Text('CALCULATE'),
+              color: bottomContainerColor,
+              margin: EdgeInsets.only(top: 10.0),
+              height: bottomContainerHeight,
+            ),
           )
         ],
       ),
