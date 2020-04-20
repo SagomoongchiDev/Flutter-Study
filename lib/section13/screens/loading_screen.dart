@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart';
+import 'package:mi_card/section13/services/location.dart';
+import 'package:mi_card/section13/services/networking.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'location_screen.dart';
+
+const apiKey = '449fe0726cecced3d7264a3051a6d5ed';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -8,36 +12,38 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  double latitude;
+  double longitude;
+
   @override
   void initState() {
-    getLocation();
-    getData();
+    super.initState();
+    getLocationData();
   }
 
-  Future<void> getLocation() async {
-    try {
-      Position position = await Geolocator()
-          .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
-      print(position);
-    } catch (e) {
-      print(e);
-    }
-  }
+  void getLocationData() async {
+    Location location = new Location();
+    await location.getLocationFromGeolocator();
 
-  void getData() async {
-    Response response = await get(
-        'https://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=439d4b804bc8187953eb36d2a8c26a02');
-    print(response.body);
+    latitude = location.latitude;
+    longitude = location.longitude;
+
+    NetworkHelper networkHelper = new NetworkHelper(
+        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
+
+    var weatherData = await networkHelper.getData();
+
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LocationScreen()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: RaisedButton(
-          //TODO: #1 현재 위치를 가져오는 함수 구현
-          onPressed: () => getLocation(),
-          child: Text('Get Location'),
+        child: SpinKitDoubleBounce(
+          color: Colors.white,
+          size: 100.0,
         ),
       ),
     );

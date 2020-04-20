@@ -1,3 +1,23 @@
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+class NetworkHelper {
+  NetworkHelper(this.url);
+
+  final String url;
+
+  Future<void> getData() async {
+    http.Response response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      String respData = response.body;
+      return jsonDecode(respData);
+    } else {
+      print(response.statusCode);
+    }
+  }
+}
+
 class WeatherModel {
   String getWeatherIcon(int condition) {
     if (condition < 300) {
